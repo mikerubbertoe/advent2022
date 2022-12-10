@@ -13,15 +13,13 @@ def part1():
 
             if cycle == 20 or (cycle - 20) % 40 == 0:
                 total += cycle * count
-
-                count = 0
+                print(total, cycle * count)
 
             if len(instructiton) == 2:
                 cycle += 1
                 if cycle == 20 or (cycle - 20) % 40 == 0:
                     total += cycle * count
-
-                    count = 0
+                    print(total, cycle * count)
                 cycle += 1
                 count += int(instructiton[1])
             else:
