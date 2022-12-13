@@ -88,22 +88,19 @@ def part2():
             monkeys.append(newMonkey)
         print(monkeys)
 
-    for i in range(0, 100):
+    for i in range(0, 10000):
         for x in range(0, len(monkeys)):
             for item in monkeys[x].items:
                 newItem = int(monkeys[x].calculateWorryLevel(item))
                 location = monkeys[x].throwingLocation(newItem)
 
                 monkeys[x].itemsInspected += 1
-                monkeys[location].items.append(newItem)
-                #monkeys[location].modItems.append(newItem % monkeys[x].test)
+                #lcm between all the monkey operations
+                monkeys[location].items.append(newItem % 9699690)
             monkeys[x].items = []
-            #monkeys[x].modItems = []
-        print("{0} {1} {2} {3}".format(monkeys[0].items, monkeys[1].items, monkeys[2].items, monkeys[3].items))
-        #print("{0} {1} {2} {3}".format(monkeys[0].modItems, monkeys[1].modItems, monkeys[2].modItems, monkeys[3].modItems))
 
     for monkey in monkeys:
         print(monkey.itemsInspected)
 
-#part1()
+part1()
 part2()
