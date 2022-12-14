@@ -30,9 +30,10 @@ def dijstra(graph, startingNode):
             y = int(n / len(graph))
             x = int(n % len(graph[0]))
             nextNode = graph[y][x]
+            thisNode = graph[int(currNode[1] / len(graph))][int(currNode[1] % len(graph[0]))]
             cost = graph[y][x].cost
 
-            if currNode[1].height + 1 < graph[y][x].height:
+            if thisNode.height + 1 < nextNode.height:
                 continue
 
             if n in not_visited:
