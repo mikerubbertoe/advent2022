@@ -2,8 +2,8 @@ import numpy as np
 input = "day14input.txt"
 
 def makeCave():
-    x = [0] * 600
-    y = [0] * 600
+    x = [0] * 1000
+    maxY = 0
     arr = np.array([x] * 300)
     with open(input) as f:
         for line in f.read().splitlines():
@@ -23,10 +23,11 @@ def makeCave():
                         arr[i][currX] = -1
                 lastX = currX
                 lastY = currY
-    return arr
+                maxY = max(maxY, currY)
+    return arr, maxY
 
 def part1():
-    arr = makeCave()
+    arr, _ = makeCave()
     sand = 0
     while True:
         notStuck = True
@@ -50,5 +51,32 @@ def part1():
                 sand += 1
                 arr[sandY][sandX] = 1
 
+def part2():
+    arr, maxY = makeCave()
+    for i in range(len(arr[250])):
+        arr[maxY + 2][i] = -1
+    sand = 0
+    while True:
+        notStuck = True
+        sandX = 500
+        sandY = 0
+        while notStuck:
+
+            if arr[sandY + 1][sandX] == 0:
+                sandY += 1
+            elif arr[sandY + 1][sandX - 1] == 0:
+                sandY += 1
+                sandX -= 1
+            elif arr[sandY + 1][sandX + 1] == 0:
+                sandY += 1
+                sandX += 1
+            else:
+                notStuck = False
+                sand += 1
+                arr[sandY][sandX] = 1
+                if sandY == 0 and sandX == 500:
+                    print(sand)
+                    return sand
 
 part1()
+part2()
